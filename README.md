@@ -35,6 +35,8 @@ M5PaperS3
 ### 1. 統合ハブ
 
 - このリポジトリ
+- GitHub:
+  - [omiya-bonsai/m5papers3-news-system](https://github.com/omiya-bonsai/m5papers3-news-system)
 - 役割:
   - 全体構成の説明
   - 導入順の整理
@@ -46,6 +48,8 @@ M5PaperS3
   - `/Users/tomato/Documents/Arduino/M5PaperS3_NewsDashboard`
 - リポジトリ名:
   - `M5PaperS3_NewsDashboard`
+- GitHub:
+  - [omiya-bonsai/M5PaperS3_NewsDashboard](https://github.com/omiya-bonsai/M5PaperS3_NewsDashboard)
 - 役割:
   - Arduino スケッチ
   - キャッシュ制御
@@ -59,6 +63,8 @@ M5PaperS3
   - `/Users/tomato/Documents/projects/m5papers3-news-server`
 - リポジトリ名:
   - `m5papers3-news-server`
+- GitHub:
+  - [omiya-bonsai/news-png-generator](https://github.com/omiya-bonsai/news-png-generator)
 - 役割:
   - RSS 取得
   - PNG 生成
