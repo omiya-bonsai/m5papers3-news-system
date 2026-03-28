@@ -1,0 +1,19 @@
+# macOS
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+
+# Editors
+*.swp
+*.swo
+*~
+
+# Arduino / embedded build artifacts
+.arduinoIDE/
+build/
+dist/
+*.bin
+*.elf
+*.hex
+*.map
