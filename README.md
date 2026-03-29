@@ -23,8 +23,6 @@ It is intentionally not the implementation repository itself. Instead, it explai
 - [`docs/repositories.md`](docs/repositories.md)
 - [`docs/operations.md`](docs/operations.md)
 
-Note: the detailed documents are currently written in Japanese.
-
 ## System Overview
 
 ```text

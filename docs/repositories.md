@@ -1,70 +1,72 @@
 # Repositories
 
-## 3 本構成
+Japanese: [repositories.ja.md](repositories.ja.md)
 
-このシステムは次の 3 本のリポジトリで運用します。
+## Three-Repository Structure
 
-### m5papers3-news-system
+This system is organized as three repositories.
 
-役割:
+### `m5papers3-news-system`
 
-- 統合ハブ
-- 全体構成説明
-- 導入順
-- 運用フロー
+Purpose:
 
-## M5PaperS3_NewsDashboard
+- integration hub
+- overall architecture overview
+- setup order
+- operation notes
 
-役割:
+### `M5PaperS3_NewsDashboard`
 
-- M5PaperS3 側スケッチ
-- `docs/` に設計メモを保持
-- キャッシュ / UI / 既読表示 / 電源ポリシーを担当
+Purpose:
 
-ローカル例:
+- M5PaperS3-side sketch
+- design notes in `docs/`
+- cache, UI, read-state display, and power policy
+
+Example local path:
 
 ```text
 /Users/tomato/Documents/Arduino/M5PaperS3_NewsDashboard
 ```
 
-## m5papers3-news-server
+### `m5papers3-news-server`
 
-役割:
+Purpose:
 
-- Raspberry Pi 側スクリプト
-- PNG 生成
-- `index.version` 生成
-- `systemd/` と HTTP 配信
+- Raspberry Pi-side scripts
+- PNG generation
+- `index.version` generation
+- `systemd` and HTTP delivery
 
-ローカル例:
+Example local path:
 
 ```text
 /Users/tomato/Documents/projects/m5papers3-news-server
 ```
 
-## 役割分離の考え方
+## How Responsibilities Are Split
 
-### 統合ハブに置くもの
+### What belongs in the integration hub
 
-- 全体像
-- セットアップ導線
-- リポジトリ間の関係
+- overall system view
+- setup navigation
+- repository relationships
 
-### M5 側に置くもの
+### What belongs in the M5 repository
 
-- デバイス固有の実装
-- 表示仕様
-- タッチ / スワイプ
-- キャッシュと電源制御
+- device-specific implementation
+- display behavior
+- touch and swipe behavior
+- cache and power control
 
-### Raspberry Pi 側に置くもの
+### What belongs in the Raspberry Pi repository
 
-- 生成・配信ロジック
-- systemd 運用
-- フォント要件
+- generation and delivery logic
+- `systemd` operations
+- font requirements
 
-## 公開時の考え方
+## Public Repository Policy
 
-- 実 NHK コンテンツ画像は公開しない
-- 生成済み PNG は repo に含めない
-- コード、設定例、README、docs を公開対象にする
+- do not publish real NHK content images
+- do not commit generated PNG output
+- source code, config examples, README files, and docs are appropriate to publish

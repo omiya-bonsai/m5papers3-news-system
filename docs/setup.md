@@ -1,62 +1,64 @@
 # Setup
 
-## 推奨セットアップ順
+Japanese: [setup.ja.md](setup.ja.md)
 
-このシステムは、次の順で導入すると詰まりにくいです。
+## Recommended Setup Order
 
-1. Raspberry Pi 側をセットアップする
-2. `index.png` と `index.version` の HTTP 配信を確認する
-3. M5PaperS3 側へ Wi‑Fi と配信先 URL を設定する
-4. M5PaperS3 の表示とページ遷移を確認する
-5. 定期更新、優先先読み、`NEW / READ` を確認する
+To keep the installation process straightforward, use this order:
 
-## 1. Raspberry Pi 側
+1. Set up the Raspberry Pi side first.
+2. Confirm that `index.png` and `index.version` are available over HTTP.
+3. Configure Wi-Fi and the server URL on the M5PaperS3 side.
+4. Confirm page rendering and navigation on the device.
+5. Confirm periodic refresh, priority prefetch, and `NEW / READ` behavior.
 
-最低限やること:
+## 1. Raspberry Pi Side
 
-- Python 仮想環境を作る
-- `pillow` と `feedparser` を入れる
-- 必要フォントを `fonts/` へ置く
-- `make_pages_png.py` で画像生成できることを確認する
-- `http.server` で `index.png` を配信できることを確認する
-- `systemd/` の unit を `~/.config/systemd/user/` へ配置する
+Minimum tasks:
 
-## 2. M5PaperS3 側
+- create a Python virtual environment
+- install `pillow` and `feedparser`
+- place required fonts under `fonts/`
+- confirm that `make_pages_png.py` can generate images
+- confirm that `http.server` can serve `index.png`
+- deploy the `systemd/` units into `~/.config/systemd/user/`
 
-最低限やること:
+## 2. M5PaperS3 Side
 
-- `config.h` に Wi‑Fi 設定を書く
-- Arduino IDE または `arduino-cli` でビルドする
-- M5PaperS3 に書き込む
-- `index` が表示されることを確認する
-- タップ / スワイプでページ遷移することを確認する
+Minimum tasks:
 
-## 3. 連携確認
+- write Wi-Fi settings into `config.h`
+- build with Arduino IDE or `arduino-cli`
+- flash the firmware to the M5PaperS3
+- confirm that the `index` page appears
+- confirm page navigation by tap and swipe
 
-Raspberry Pi 側で確認:
+## 3. Integration Check
+
+Check on the Raspberry Pi side:
 
 - `curl -I http://127.0.0.1:8010/index.png`
 - `systemctl --user status m5news-http.service`
 - `systemctl --user status m5news-generate.timer`
 
-M5 側で確認:
+Check on the M5 side:
 
-- `index` 表示
-- 詳細ページ遷移
-- 定期更新
-- 右上 `NEW / READ`
+- `index` display
+- detail page transitions
+- periodic refresh
+- top-right `NEW / READ` indication
 
-## 更新時の作業
+## Update Workflow
 
-### Raspberry Pi 側を修正した場合
+### When Raspberry Pi code changes
 
-1. Mac 上の `m5papers3-news-server` で編集
+1. Edit `m5papers3-news-server` on the Mac
 2. commit / push
-3. Raspberry Pi 上で `git pull`
-4. 必要なら service / timer を再起動
+3. run `git pull` on the Raspberry Pi
+4. restart services or timers if needed
 
-### M5 側を修正した場合
+### When M5 device code changes
 
-1. Mac 上の `M5PaperS3_NewsDashboard` で編集
+1. Edit `M5PaperS3_NewsDashboard` on the Mac
 2. commit / push
-3. 再ビルドして M5PaperS3 へ書き込み
+3. rebuild and flash the M5PaperS3
