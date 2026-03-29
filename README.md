@@ -1,27 +1,31 @@
 # M5PaperS3 News System
 
-M5PaperS3 と Raspberry Pi を組み合わせて、ニュース画像を自動生成・配信・表示するシステムの統合ハブです。
+Japanese: [README.ja.md](README.ja.md)
 
-このリポジトリは実装本体ではなく、全体像と導入順、各リポジトリへの入口をまとめるための案内用リポジトリです。
+This repository is the integration hub for a hobby project that combines an M5PaperS3 device and a Raspberry Pi to generate, serve, and display news pages.
+
+It is intentionally not the implementation repository itself. Instead, it explains the overall architecture, setup order, and navigation across the three related repositories.
 
 ![M5PaperS3 device photo](img/01.jpeg)
 
 ![M5PaperS3 News System overview](img/01.png)
 
-詳細は次を参照してください。
+## Related Repositories
+
+- M5PaperS3 device:
+  - [omiya-bonsai/M5PaperS3_NewsDashboard](https://github.com/omiya-bonsai/M5PaperS3_NewsDashboard)
+- Raspberry Pi server:
+  - [omiya-bonsai/news-png-generator](https://github.com/omiya-bonsai/news-png-generator)
+
+## Detailed Documents
 
 - [`docs/setup.md`](docs/setup.md)
 - [`docs/repositories.md`](docs/repositories.md)
 - [`docs/operations.md`](docs/operations.md)
 
-実装本体への入口:
+Note: the detailed documents are currently written in Japanese.
 
-- M5PaperS3 側:
-  - [omiya-bonsai/M5PaperS3_NewsDashboard](https://github.com/omiya-bonsai/M5PaperS3_NewsDashboard)
-- Raspberry Pi 側:
-  - [omiya-bonsai/news-png-generator](https://github.com/omiya-bonsai/news-png-generator)
-
-## 全体構成
+## System Overview
 
 ```text
 NHK RSS
@@ -34,110 +38,99 @@ Raspberry Pi
    ↓ HTTP
 M5PaperS3
   - SD cache
-  - index.version 差分確認
-  - タッチ / スワイプ操作
-  - NEW / READ 表示
+  - index.version checks
+  - touch / swipe UI
+  - NEW / READ state
 ```
 
-## リポジトリ構成
+## Repository Layout
 
-このシステムは 3 本のリポジトリで構成します。
+This project is organized into three repositories.
 
-### 1. 統合ハブ
+### 1. Integration Hub
 
-- このリポジトリ
-- GitHub:
+- Repository:
   - [omiya-bonsai/m5papers3-news-system](https://github.com/omiya-bonsai/m5papers3-news-system)
-- 役割:
-  - 全体構成の説明
-  - 導入順の整理
-  - 各リポジトリへの入口
+- Purpose:
+  - explain the whole system
+  - define setup order
+  - provide links to the implementation repositories
 
-### 2. M5PaperS3 側
+### 2. M5PaperS3 Device
 
-- ローカル作業ディレクトリ:
-  - `/Users/tomato/Documents/Arduino/M5PaperS3_NewsDashboard`
-- リポジトリ名:
-  - `M5PaperS3_NewsDashboard`
-- GitHub:
+- Repository:
   - [omiya-bonsai/M5PaperS3_NewsDashboard](https://github.com/omiya-bonsai/M5PaperS3_NewsDashboard)
-- 役割:
-  - Arduino スケッチ
-  - キャッシュ制御
-  - 定期 `index` 更新
-  - タッチ / スワイプ UI
-  - `NEW / READ` 表示
+- Purpose:
+  - Arduino sketch
+  - cache control
+  - periodic index refresh
+  - touch and swipe UI
+  - NEW / READ indication
 
-### 3. Raspberry Pi 側
+### 3. Raspberry Pi Server
 
-- ローカル作業ディレクトリ:
-  - `/Users/tomato/Documents/projects/m5papers3-news-server`
-- リポジトリ名:
-  - `m5papers3-news-server`
-- GitHub:
+- Repository:
   - [omiya-bonsai/news-png-generator](https://github.com/omiya-bonsai/news-png-generator)
-- 役割:
-  - RSS 取得
-  - PNG 生成
-  - `index.version` 生成
-  - HTTP 配信
-  - systemd 運用
+- Purpose:
+  - fetch RSS
+  - generate PNG files
+  - generate `index.version`
+  - serve files over HTTP
+  - run the services with `systemd`
 
-## 導入順
+## Recommended Setup Order
 
-導入は次の順で進めると分かりやすいです。
+1. Set up the Raspberry Pi repository first.
+2. Confirm that `index.png` and `index.version` are available over HTTP.
+3. Configure Wi-Fi and the server URL on the M5PaperS3 side.
+4. Confirm `index` rendering and page navigation on the device.
+5. Confirm periodic refresh, prefetch behavior, and `NEW / READ` status changes.
 
-1. Raspberry Pi 側をセットアップする
-2. `index.png` と `index.version` が HTTP 配信できることを確認する
-3. M5PaperS3 側で Wi‑Fi と配信 URL を設定する
-4. M5PaperS3 で `index` 表示とページ遷移を確認する
-5. 定期更新、先読み、`NEW / READ` 表示を確認する
+## What Each Repository Should Contain
 
-## 各リポジトリで扱うもの
+### M5PaperS3 repository
 
-### M5PaperS3 側リポジトリ
+Include:
 
-入れるもの:
-
-- Arduino スケッチ
+- Arduino sketch
 - `README.md`
+- `README.ja.md`
 - `docs/`
 - `config.example.h`
 
-入れないもの:
+Do not include:
 
 - `config.h`
-- 実際に取得したニュース PNG
-- 実際の NHK コンテンツ画像
+- fetched news PNG files
+- screenshots or images that contain real NHK content
 
-### Raspberry Pi 側リポジトリ
+### Raspberry Pi repository
 
-入れるもの:
+Include:
 
-- Python スクリプト
+- Python scripts
 - `README.md`
-- `systemd/` 配布用 unit
+- `README.ja.md`
+- distributable `systemd/` unit files
 - `.gitignore`
 
-入れないもの:
+Do not include:
 
 - `fonts/`
-- 生成済み `index.png` / `page*.png`
+- generated `index.png` / `page*.png`
 - `index.version`
-- 実ニュース画像
+- real news images
 
-## 運用フロー
+## Typical Workflow
 
-### 通常の編集
+### Normal editing flow
 
-1. Mac 上の各リポジトリで編集する
-2. 必要に応じて commit / push する
-3. Raspberry Pi 側で `git pull` する
-4. systemd service / timer を必要なら再起動する
+1. Edit the repositories on a Mac.
+2. Commit and push as needed.
+3. Run `git pull` on the Raspberry Pi.
+4. Restart user services or timers if required.
 
-### Raspberry Pi 反映
-
-例:
+### Raspberry Pi update example
 
 ```sh
 cd ~/m5papers3
@@ -146,45 +139,24 @@ systemctl --user restart m5news-http.service
 systemctl --user restart m5news-generate.timer
 ```
 
-## 役割分担の考え方
+## Publication Policy
 
-### 統合ハブ
+The current policy is to keep real NHK content images and generated PNG outputs out of public repositories.
 
-- 全体像を説明する
-- どこを見れば何が分かるかを案内する
+What is intended to be public:
 
-### M5PaperS3 側
+- source code
+- configuration examples
+- documentation
+- self-made mock images
 
-- 表示
-- UI
-- キャッシュ
-- 電源ポリシー
+## Future Additions
 
-### Raspberry Pi 側
-
-- データ生成
-- 並び順制御
-- 配信
-- systemd 運用
-
-## 公開方針メモ
-
-現時点では、実 NHK コンテンツ画像や生成済み PNG は公開リポジトリへ含めない方針を前提にします。
-
-公開対象は基本的に次です。
-
-- コード
-- 設定例
-- ドキュメント
-- 自作ダミー画像
-
-## 今後このリポジトリに追加するとよいもの
-
-- セットアップ手順の詳細
-- よくあるトラブルシュート
-- リポジトリ間のリンク一覧
-- システム構成図
+- more detailed setup guides
+- common troubleshooting notes
+- repository-to-repository link map
+- clearer architecture diagrams
 
 ## License
 
-このリポジトリは [MIT License](LICENSE) です。
+This repository is licensed under the [MIT License](LICENSE).
