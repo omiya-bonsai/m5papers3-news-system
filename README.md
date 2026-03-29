@@ -6,6 +6,8 @@ This repository is the integration hub for a hobby project that combines an M5Pa
 
 It is intentionally not the implementation repository itself. Instead, it explains the overall architecture, setup order, and navigation across the three related repositories.
 
+The project started as a workaround for unreliable direct rendering of Japanese and other multibyte text on the target device. Rather than depending on device-side text rendering, it renders pages as PNG images on the Raspberry Pi and lets the M5PaperS3 focus on caching, navigation, and refresh control.
+
 ![M5PaperS3 device photo](img/01.jpeg)
 
 ![M5PaperS3 News System overview](img/01.en.png)
