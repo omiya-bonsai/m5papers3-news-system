@@ -8,7 +8,7 @@ It is intentionally not the implementation repository itself. Instead, it explai
 
 ![M5PaperS3 device photo](img/01.jpeg)
 
-![M5PaperS3 News System overview](img/01.png)
+![M5PaperS3 News System overview](img/01.en.png)
 
 ## Related Repositories
 
